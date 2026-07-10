@@ -509,6 +509,12 @@
       })();
     }
   }
+
+const bgm = document.getElementById("bgm");
+
+document.addEventListener("click", () => {
+    bgm.play();
+}, { once: true });
 </script>
 </body>
 </html>
