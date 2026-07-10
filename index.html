@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>Toko Maaf — Struk Permintaan Maaf 💌</title>
+<noscript><style>.reveal{opacity:1 !important;transform:none !important;}
+/* Snoopy Decoration */
+.snoopy-side{position:fixed;z-index:5;width:120px;opacity:.9;pointer-events:none;animation:floatSnoopy 4s ease-in-out infinite}
+.snoopy-left-1{left:20px;top:80px}.snoopy-left-2{left:10px;bottom:80px}.snoopy-right-1{right:20px;top:140px}.snoopy-right-2{right:10px;bottom:100px}
+@keyframes floatSnoopy{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.snoopy-right-1{animation-delay:.8s}.snoopy-left-2{animation-delay:1.6s}.snoopy-right-2{animation-delay:2.4s}
+@media(max-width:900px){.snoopy-side{width:70px;opacity:.45}}
+
+</style></noscript>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&display=swap');
+
+  :root {
+    --kraft: #f4b9c6;
+    --card: #FFFDF8;
+    --ink: #0f0f0f;
+    --stamp: #D6455A;z
+    --stamp-dark: #B33547;
+    --coin: #E7A33D;
+    --line: #CDBBA0;
+    --blush: #F5C9CF;
+    --good: #3E8E5A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--kraft);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  .wrap { max-width: 540px; margin: 0 auto; padding: 0 20px; position: relative; }
+
+  .display { font-family: "Baloo 2", -apple-system, sans-serif; font-weight: 800; }
+  .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; }
+
+  .eyebrow {
+    display: block;
+    text-align: center;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--stamp-dark);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  section { padding: 52px 0; position: relative; }
+
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  hr.tear { border: none; border-top: 2px dashed var(--line); margin: 0; }
+
+  .zigzag { display: block; width: 100%; height: 14px; }
+  .zigzag-flip { transform: rotate(180deg); }
+
+  /* HERO */
+  .hero { padding-top: 18px; text-align: center; }
+  .bell { font-size: 2.6rem; display: inline-block; transform-origin: top center; animation: ring 2.4s ease-in-out 3; }
+  @keyframes ring {
+    0%, 100% { transform: rotate(0deg); }
+    10% { transform: rotate(14deg); }
+    20% { transform: rotate(-12deg); }
+    30% { transform: rotate(8deg); }
+    40% { transform: rotate(-6deg); }
+    50% { transform: rotate(0deg); }
+  }
+  .hero h1 { font-size: clamp(1.9rem, 7vw, 2.6rem); margin: 12px 0 12px; line-height: 1.15; }
+  .hero .lead { font-size: 1.02rem; opacity: 0.82; max-width: 420px; margin: 0 auto 24px; }
+
+  .sign {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--card); border: 2px solid var(--ink);
+    border-radius: 12px; padding: 10px 20px; margin: 4px auto 30px;
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+  .sign .status { font-weight: 800; font-size: 1.05rem; }
+  .sign .status.closed { color: var(--stamp); }
+  .sign .status.open { color: var(--good); display: none; }
+  .sign.flipped .status.closed { display: none; }
+  .sign.flipped .status.open { display: inline; }
+
+  .scroll-cue { display: inline-block; font-size: 0.88rem; color: var(--ink); opacity: 0.65; text-decoration: none; }
+
+  .section-title { text-align: center; font-size: clamp(1.4rem, 5vw, 1.8rem); margin-bottom: 26px; line-height: 1.3; }
+
+  /* LETTER */
+  .letter-card {
+    background: var(--card); border-radius: 18px; padding: 32px 24px 26px;
+    box-shadow: 0 10px 30px rgba(58,38,32,0.08);
+    transform: rotate(-1deg); position: relative;
+  }
+  .letter-card p { margin-bottom: 15px; }
+  .letter-card p:last-of-type { margin-bottom: 0; }
+  .letter-sign { opacity: 0.75; font-size: 0.95rem; }
+  .stamp-mark {
+    position: absolute; top: -16px; right: -8px; width: 74px; height: 74px; border-radius: 50%;
+    border: 3px solid var(--stamp); color: var(--stamp);
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    font-size: 0.68rem; line-height: 1.2; transform: rotate(10deg);
+    background: rgba(214,69,90,0.05);
+  }
+
+  /* CATALOG */
+  .catalog-scroll {
+    display: flex; gap: 14px; overflow-x: auto; padding: 6px 4px 18px;
+    scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .catalog-scroll::-webkit-scrollbar { display: none; }
+  .catalog-card {
+    flex: 0 0 72%; scroll-snap-align: center; background: var(--card);
+    border-radius: 16px; padding: 22px 16px; box-shadow: 0 8px 20px rgba(58,38,32,0.07);
+    text-align: center;
+  }
+  .catalog-card .icon { font-size: 2.4rem; display: block; margin-bottom: 10px; }
+  .catalog-card .name { font-family: "Baloo 2"; font-weight: 700; font-size: 1rem; margin-bottom: 8px; }
+  .catalog-card .tag {
+    font-size: 0.74rem; color: var(--stamp-dark); background: var(--blush);
+    display: inline-block; padding: 3px 10px; border-radius: 999px;
+  }
+  .dots { display: flex; justify-content: center; gap: 7px; margin-top: 4px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--line); transition: background .3s; }
+  .dot.active { background: var(--stamp); }
+  .catalog-note { text-align: center; font-size: 0.84rem; opacity: 0.6; margin-top: 16px; padding: 0 8px; }
+
+  @media (min-width: 600px) { .catalog-card { flex-basis: 45%; } }
+
+  /* QUIZ */
+  .quiz-card { background: var(--card); border-radius: 18px; padding: 26px 22px; box-shadow: 0 10px 30px rgba(58,38,32,0.08); }
+  .quiz-progress { font-size: 0.78rem; color: var(--stamp-dark); margin-bottom: 14px; }
+  .quiz-question { font-family: "Baloo 2"; font-weight: 700; font-size: 1.12rem; margin-bottom: 18px; line-height: 1.35; }
+  .quiz-option {
+    display: block; width: 100%; text-align: left; background: var(--kraft);
+    border: 2px solid var(--line); border-radius: 12px; padding: 13px 16px; margin-bottom: 10px;
+    font-size: 0.95rem; color: var(--ink); cursor: pointer; font-family: inherit;
+    transition: transform .15s ease, border-color .15s ease;
+  }
+  .quiz-option:hover { border-color: var(--stamp); transform: translateX(3px); }
+  .quiz-option:disabled { opacity: 0.5; cursor: default; transform: none; }
+  .quiz-option.picked.picked { opacity: 1; background: var(--blush); border-color: var(--stamp); }
+  .quiz-response {
+    margin-top: 14px; padding: 12px 14px; background: rgba(231,163,61,0.16);
+    border-left: 3px solid var(--coin); border-radius: 8px; font-size: 0.92rem;
+  }
+  .quiz-next {
+    margin-top: 18px; background: var(--ink); color: var(--kraft); border: none;
+    padding: 11px 22px; border-radius: 999px; font-weight: 600; cursor: pointer;
+    font-size: 0.9rem; font-family: inherit;
+  }
+  .quiz-result { text-align: center; }
+  .quiz-result .big-emoji { font-size: 2.4rem; display: block; margin-bottom: 10px; }
+  .quiz-result p.headline { font-family: "Baloo 2"; font-weight: 700; font-size: 1.15rem; margin-bottom: 8px; }
+  .quiz-result p.sub { opacity: 0.8; margin-bottom: 18px; }
+
+  /* RECEIPT */
+  .closing { padding-top: 6px; }
+  .receipt-wrap { position: relative; }
+  .receipt {
+    background: var(--card); padding: 28px 26px 32px; box-shadow: 0 14px 40px rgba(58,38,32,0.12);
+  }
+  .receipt-head { text-align: center; margin-bottom: 4px; }
+  .receipt-head h2 { font-size: 1.4rem; }
+  .receipt-sub { text-align: center; font-size: 0.76rem; opacity: 0.55; margin-bottom: 22px; }
+  .receipt-row { display: flex; justify-content: space-between; gap: 10px; font-size: 0.87rem; padding: 6px 0; }
+  .receipt-row .qty { text-align: right; white-space: nowrap; color: var(--stamp-dark); }
+  .receipt-divider { border-top: 1.5px dashed var(--line); margin: 14px 0; }
+  .receipt-total { display: flex; justify-content: space-between; font-family: "Baloo 2"; font-weight: 800; font-size: 1.05rem; margin-bottom: 26px; }
+  .receipt-total .amount { color: var(--stamp); }
+
+  .btn-primary {
+    display: block; width: 100%; background: var(--stamp); color: #fff; border: none;
+    padding: 15px; border-radius: 999px; font-family: "Baloo 2"; font-weight: 700; font-size: 1.05rem;
+    cursor: pointer; box-shadow: 0 6px 0 var(--stamp-dark); transition: transform .12s ease, box-shadow .12s ease;
+  }
+  .btn-primary:active { transform: translateY(4px); box-shadow: 0 2px 0 var(--stamp-dark); }
+
+  .btn-ghost {
+    display: block; width: fit-content; margin: 16px auto 0; background: transparent; border: none;
+    color: var(--ink); opacity: 0.55; font-size: 0.84rem; cursor: pointer; padding: 8px 14px;
+    font-family: inherit; transition: transform .2s ease;
+  }
+
+  .final-message {
+    margin-top: 22px; text-align: center; background: rgba(62,142,90,0.1);
+    border: 2px dashed var(--good); border-radius: 14px; padding: 20px 16px; font-size: 0.96rem;
+    display: none;
+  }
+  .final-message.show { display: block; }
+  .final-message strong { font-size: 1.2rem; }
+
+  .footer-note { text-align: center; font-size: 0.78rem; opacity: 0.55; margin-top: 26px; padding: 0 16px 10px; }
+
+  .particle { position: fixed; pointer-events: none; font-size: 1.3rem; z-index: 999; user-select: none; }
+
+  button:focus-visible, a:focus-visible { outline: 3px solid var(--coin); outline-offset: 3px; border-radius: 6px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+/* Snoopy Decoration */
+.snoopy-side{position:fixed;z-index:5;width:120px;opacity:.9;pointer-events:none;animation:floatSnoopy 4s ease-in-out infinite}
+.snoopy-left-1{left:20px;top:80px}.snoopy-left-2{left:10px;bottom:80px}.snoopy-right-1{right:20px;top:140px}.snoopy-right-2{right:10px;bottom:100px}
+@keyframes floatSnoopy{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.snoopy-right-1{animation-delay:.8s}.snoopy-left-2{animation-delay:1.6s}.snoopy-right-2{animation-delay:2.4s}
+@media(max-width:900px){.snoopy-side{width:70px;opacity:.45}}
+
+.catalog-image{
+    width:100%;
+    aspect-ratio:1 / 1;
+    object-fit:cover;
+    display:block;
+    border-radius:16px;
+    margin-bottom:12px;
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+
+</style>
+</head>
+<body>
+
+<img src="snoopy1.png" class="snoopy-side snoopy-left-1">
+<img src="snoopy2.png" class="snoopy-side snoopy-right-1">
+<img src="snoopy3.png" class="snoopy-side snoopy-left-2">
+<img src="snoopy4.png" class="snoopy-side snoopy-right-2">
+
+<div class="wrap">
+
+  <section class="hero">
+    <p class="eyebrow">Toko Maaf — Cabang Adelia Cahyani Putri</p>
+    <div class="bell" aria-hidden="true">🔔</div>
+    <h1 class="display">Lagi Buka, Khusus Buat Adelia</h1>
+    <p class="lead">Toko ini biasanya tutup kalau lagi ngambek-ngambekan. Tapi hari ini dibuka paksa, soalnya ada satu struk yang belum selesai di antara kita.</p>
+    <div class="sign" id="signBox">
+      <span aria-hidden="true">🚪</span>
+      <span class="status closed display">TUTUP</span>
+      <span class="status open display">BUKA!</span>
+    </div>
+    <br>
+    <a href="#letter" class="scroll-cue mono">↓ liat struknya ↓</a>
+  </section>
+
+  <hr class="tear">
+
+  <section id="letter" class="reveal">
+    <p class="eyebrow">Nota Pengakuan #001</p>
+    <h2 class="section-title display">Sebelum ke Struknya, Baca Ini Dulu</h2>
+    <div class="letter-card">
+      <div class="stamp-mark display">BERSALAH<br>RESMI</div>
+      <p>Halooooooooo.</p>
+      <p>Maaf ya kalau tadi aku bikin kamu kecewa. Mungkin buat sebagian orang ini hal kecil, tapi aku tetap nggak suka kalau sampai bikin mood kamu jadi jelek atau bikin kamu ngerasa kecewa gara-gara aku.</p>
+      <p>I know I could've handled it better, dan lain kali aku bakal lebih kepikiran sebelum ngelakuin atau ngomong sesuatu. Aku nggak bermaksud bikin kamu kesel atau ngerusak hari kamu. Mungkin aku kurang peka atau kurang mikirin dari sudut pandang kamu, dan itu bakal jadi pelajaran juga buat aku.</p>
+      <p>Aku juga nggak mau hal-hal kecil yang sebenarnya bisa diselesaiin malah jadi kepikiran terus. Kalau memang ada yang kurang dari sikap atau cara aku, feel free buat bilang ke aku ya. Aku lebih seneng kamu jujur daripada dipendem sendiri, karena aku juga pengen belajar buat jadi lebih baik.</p>
+      <p>Thank you ya udah ngasih tahu apa yang kamu rasain, at least sekarang aku jadi tahu bagian mana yang harus aku perbaiki. I'll do better, not because I have to, but because you're important to me.</p>
+      <p>Once again, I'm sorry ya. Semoga habis ini kita udah nggak kepikiran lagi soal yang tadi. 🤍</p>
+      <p>Nggak akan banyak alesan, soalnya emang ini salah aku. Maaf, beneran maaf. Aku janji belajar dari ini.</p>
+      <p>Boleh nggak kamu udah marahnya? Aku pengen kamu ngomel-ngomel kayak biasanya lagi. HAHAHAAA</p>
+      <p class="letter-sign">Ttd,<br>Cowok nya Adelia</p>
+    </div>
+  </section>
+
+  <hr class="tear">
+
+
+  <section id="gallery" class="reveal">
+    <p class="eyebrow">Katalog Kenangan</p>
+    <h2 class="section-title display">Barang di Etalase Kenangan Kita</h2>
+    <div class="catalog-scroll" id="catalogScroll">
+      <div class="catalog-card">
+<img src="sabiladel1.png" class="catalog-image" alt="Ketawa Nggak Jelas Berdua">
+<p class="name">Ketawa Nggak Jelas Berdua</p><span class="tag mono">Stok: Banyak Banget</span></div>
+      <div class="catalog-card">
+<img src="sabiladel2.png" class="catalog-image" alt="Holding Hand Sampe Tangan Keringetan">
+<p class="name">Holding Hand Sampe Tangan Keringetan</p><span class="tag mono">Limited Edition</span></div>
+      <div class="catalog-card">
+<img src="sabiladel3.png" class="catalog-image" alt="First Date yang Awkward">
+<p class="name">First Date yang Awkward</p><span class="tag mono">Coming Soon</span></div>
+      <div class="catalog-card">
+<img src="sabiladel5.png" class="catalog-image" alt="Call Seharian">
+<p class="name">Call Seharian</p><span class="tag mono">Best Seller</span></div>
+    </div>
+    <div class="dots" id="catalogDots"></div>
+  </section>
+
+  <hr class="tear">
+
+  <section id="quiz" class="reveal">
+    <p class="eyebrow">Kuis Apalah itu</p>
+    <h2 class="section-title display">Isi Dulu Formulir Kasirnya</h2>
+    <div class="quiz-card" id="quizCard"></div>
+  </section>
+
+  <hr class="tear">
+
+  <section id="closing" class="reveal closing">
+    <div class="receipt-wrap">
+      <svg class="zigzag" viewBox="0 0 120 14" preserveAspectRatio="none" aria-hidden="true">
+        <polygon points="0,14 6,0 12,14 18,0 24,14 30,0 36,14 42,0 48,14 54,0 60,14 66,0 72,14 78,0 84,14 90,0 96,14 102,0 108,14 114,0 120,14" fill="var(--card)"/>
+      </svg>
+      <div class="receipt">
+        <div class="receipt-head">
+          <p class="eyebrow">No. Transaksi #MAAF-001</p>
+          <h2 class="display">Struk Permintaan Maaf</h2>
+        </div>
+        <p class="receipt-sub mono">Tanggal: Hari Ini · Kasir: Syabil cowok Adelia</p>
+
+        <div class="receipt-row mono"><span class="item">1x Rasa Bersalah</span><span class="qty">Banyak</span></div>
+        <div class="receipt-row mono"><span class="item">1x Pelukan Gratis</span><span class="qty">Menyusul</span></div>
+        <div class="receipt-row mono"><span class="item">1x Traktir Jajan</span><span class="qty">Menyusul</span></div>
+        <div class="receipt-row mono"><span class="item">1x Janji Nggak Ngulangin</span><span class="qty">1</span></div>
+        <div class="receipt-row mono"><span class="item">1x Sayang ke Kamu</span><span class="qty">Selamanya</span></div>
+
+        <div class="receipt-divider"></div>
+        <div class="receipt-total"><span>Total</span><span class="amount">Semua Cinta Aku 💕</span></div>
+
+        <button class="btn-primary" id="forgiveBtn">Bayar &amp; Maafin Aku 🥹</button>
+        <button class="btn-ghost mono" id="grudgeBtn">Masih Ngambek Dulu Ah 😤</button>
+
+        <div class="final-message" id="finalMessage">
+          <strong class="display">LUNAS! 🎉</strong>
+          <p style="margin-top:8px;">Makasih ya udah mau maafin aku. Struk ini resmi lunas dibayar pelukan (yang asli nanti pas ketemu). Beneran deh, sayang kamu banyak 💕</p>
+        </div>
+      </div>
+      <svg class="zigzag zigzag-flip" viewBox="0 0 120 14" preserveAspectRatio="none" aria-hidden="true">
+        <polygon points="0,14 6,0 12,14 18,0 24,14 30,0 36,14 42,0 48,14 54,0 60,14 66,0 72,14 78,0 84,14 90,0 96,14 102,0 108,14 114,0 120,14" fill="var(--card)"/>
+      </svg>
+    </div>
+    <p class="footer-note">psst — kirim foto kalian ke chat ini, nanti katalognya diganti foto asli kalian. nggak usah ngoding sama sekali kok 🫶</p>
+  </section>
+
+</div>
+
+<script>
+  // Scroll reveal
+  var revealEls = document.querySelectorAll('.reveal');
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(function(el) { io.observe(el); });
+
+  // Sign flip on load
+  setTimeout(function() {
+    document.getElementById('signBox').classList.add('flipped');
+  }, 900);
+
+  // Catalog dots
+  var catalogScroll = document.getElementById('catalogScroll');
+  var cards = catalogScroll.querySelectorAll('.catalog-card');
+  var dotsContainer = document.getElementById('catalogDots');
+  cards.forEach(function(_, i) {
+    var d = document.createElement('span');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    dotsContainer.appendChild(d);
+  });
+  var dots = dotsContainer.querySelectorAll('.dot');
+  catalogScroll.addEventListener('scroll', function() {
+    var idx = Math.round(catalogScroll.scrollLeft / (catalogScroll.scrollWidth / cards.length));
+    dots.forEach(function(d, i) { d.classList.toggle('active', i === idx); });
+  });
+
+  // Quiz data
+  var quizData = [
+    { q: "Kalau lagi berantem, biasanya siapa yang connect duluan?", options: [
+      { text: "Aku, nggak tahan liat kamu ngambek", r: "Eyyy" },
+      { text: "Kamu, tapi aku mulai ngobrol receh duluan", r: "Asoyy" },
+      { text: "Berdua bareng, ujung-ujungnya ketawa sendiri", r: "Lusyukk kya waktu itu" }
+    ]},
+    { q: "Cara paling ampuh bikin kamu luluh itu apa?", options: [
+      { text: "Dibeliin makanan favorit", r: "Noted, 📝" },
+      { text: "Dipeluk sampai kesel ilang", r: "HUGGGGG 🤤" },
+      { text: "Dibecandain sampai lupa marah", r: "Maenyaaa Nengg" }
+    ]},
+    { q: "Kalau lagi kangen tapi jauhan, biasanya ngapain?", options: [
+      { text: "Cerita random nggak penting tapi seru", r: "SERUUU" },
+      { text: "Video call, diem-dieman tapi nyaman", r: "Diam adalah emas 😭" },
+      { text: "Becanda-becanda sampai lupa waktu", r: "Lebihh seruuuuu" }
+    ]},
+    { q: "Panggilan sayang paling gemesin versi kamu itu…", options: [
+      { text: "Sayang", r: "Normal teing, tapi enakk dibacaaa" },
+      { text: "Seng", r: "🤤" },
+      { text: "Abing / Dedel", r: "Ini paling LUCUUUK, jujur" }
+    ]},
+    { q: "Kalau harus milih cara baikan…", options: [
+      { text: "Long text, diem dieman", r: "GILA BGT KALO MILIH INI" },
+      { text: "Harus ketemu langsung baru afdol", r: "MAUU tapi susah hehe" },
+      { text: "Video call sambil oorongohan", r: "Best Seller" }
+    ]}
+  ];
+
+  var qIndex = 0;
+  var quizCard = document.getElementById('quizCard');
+
+  function renderQuiz() {
+    if (qIndex >= quizData.length) {
+      quizCard.innerHTML =
+        '<div class="quiz-result">' +
+          '<span class="big-emoji">🎉</span>' +
+          '<p class="headline">Selesai!</p>' +
+          '<p class="sub">GILAKKK MAKASIHH BANGET UDAH NGEKLIKKK</p>' +
+          '<button class="quiz-next" id="toReceiptBtn">Lanjut ke Struk Ceuu →</button>' +
+        '</div>';
+      document.getElementById('toReceiptBtn').addEventListener('click', function() {
+        document.getElementById('closing').scrollIntoView({ behavior: 'smooth' });
+      });
+      return;
+    }
+    var item = quizData[qIndex];
+    quizCard.innerHTML =
+      '<p class="quiz-progress mono">Soal ' + (qIndex + 1) + '/' + quizData.length + '</p>' +
+      '<p class="quiz-question">' + item.q + '</p>' +
+      '<div id="optionsWrap"></div>' +
+      '<div id="responseWrap"></div>';
+
+    var wrap = document.getElementById('optionsWrap');
+    item.options.forEach(function(opt) {
+      var btn = document.createElement('button');
+      btn.className = 'quiz-option';
+      btn.textContent = opt.text;
+      btn.addEventListener('click', function() {
+        if (wrap.dataset.answered) return;
+        wrap.dataset.answered = "1";
+        Array.prototype.forEach.call(wrap.children, function(c) { c.disabled = true; });
+        btn.classList.add('picked');
+        document.getElementById('responseWrap').innerHTML =
+          '<div class="quiz-response">' + opt.r + '</div>' +
+          '<button class="quiz-next" id="nextBtn">Lanjut →</button>';
+        document.getElementById('nextBtn').addEventListener('click', function() {
+          qIndex++;
+          renderQuiz();
+        });
+      });
+      wrap.appendChild(btn);
+    });
+  }
+  renderQuiz();
+
+  // Dodge button
+  var grudgeBtn = document.getElementById('grudgeBtn');
+  var dodgeCount = 0;
+  var dodgeTexts = ["Eh, jangan gitu dong 🥺", "Tungguu bentar-", "Yakin nih?", "Terakhir deh, janji-", "Yaudah deh, maafin aja 😆"];
+  grudgeBtn.addEventListener('click', function() {
+    if (dodgeCount < 4) {
+      var x = (Math.random() - 0.5) * 160;
+      var y = (Math.random() - 0.5) * 36;
+      grudgeBtn.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+      grudgeBtn.textContent = dodgeTexts[dodgeCount];
+      dodgeCount++;
+    } else {
+      grudgeBtn.style.transform = 'none';
+      grudgeBtn.textContent = dodgeTexts[4];
+      grudgeBtn.disabled = true;
+      grudgeBtn.style.opacity = '0.4';
+    }
+  });
+
+  // Forgive button + confetti burst
+  var forgiveBtn = document.getElementById('forgiveBtn');
+  var finalMessage = document.getElementById('finalMessage');
+  forgiveBtn.addEventListener('click', function() {
+    burst(forgiveBtn);
+    finalMessage.classList.add('show');
+    finalMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+
+  function burst(originEl) {
+    var rect = originEl.getBoundingClientRect();
+    var emojis = ['💕', '🪙', '✨', '💌'];
+    for (var i = 0; i < 22; i++) {
+      (function() {
+        var p = document.createElement('span');
+        p.className = 'particle';
+        p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        p.style.left = (rect.left + rect.width / 2) + 'px';
+        p.style.top = (rect.top + rect.height / 2) + 'px';
+        document.body.appendChild(p);
+        var angle = Math.random() * Math.PI * 2;
+        var dist = 80 + Math.random() * 120;
+        var dx = Math.cos(angle) * dist;
+        var dy = Math.sin(angle) * dist - 40;
+        if (p.animate) {
+          p.animate([
+            { transform: 'translate(0,0) scale(1) rotate(0deg)', opacity: 1 },
+            { transform: 'translate(' + dx + 'px, ' + dy + 'px) scale(0.6) rotate(' + (Math.random() * 360) + 'deg)', opacity: 0 }
+          ], { duration: 900 + Math.random() * 400, easing: 'cubic-bezier(.2,.8,.3,1)' });
+        }
+        setTimeout(function() { p.remove(); }, 1400);
+      })();
+    }
+  }
+</script>
+</body>
+</html>
+
+
